@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
@@ -60,17 +60,12 @@
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#app" class="nav-link">Mobile App</a></li>
-                <!-- <li><a href="#testimonials" class="nav-link">Testimonials</a></li> -->
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#therapists" class="nav-link">Therapists</a></li>
+                <li><a href="#contact" class="nav-link" data-section="#contact">Contact</a></li>
             </ul>
             
             <div class="nav-actions">
-                <a href="tel:+25261600597" class="nav-btn emergency-btn">
-                    <i class="fas fa-phone"></i>
-                    Emergency
-                </a>
-                <a href="#contact" class="nav-btn book-btn">
+                <a href="#contact-form" class="nav-btn book-btn">
                     <i class="fas fa-calendar-plus"></i>
                     Book Session
                 </a>
@@ -120,7 +115,7 @@
                     </p>
                     
                     <div class="hero-actions">
-                        <a href="#contact" class="cta-primary" onclick="scrollToSection('#contact')">
+                        <a href="#contact-form" class="cta-primary" onclick="scrollToSection('#contact')">
                             <i class="fas fa-calendar-check"></i>
                             <span>Book Your Session</span>
                             <div class="btn-glow"></div>
@@ -131,7 +126,7 @@
                         </a>
                     </div>
                     
-                    <div class="hero-stats">
+                    <!-- <div class="hero-stats">
                         <div class="stat-card">
                             <div class="stat-number" data-target="50">0</div>
                             <div class="stat-label">Happy Clients</div>
@@ -152,7 +147,7 @@
                             <div class="stat-label">24/7 Support</div>
                             <div class="stat-icon">🕐</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 
                 <div class="hero-visual">
@@ -275,17 +270,17 @@
                                 <i class="fas fa-shield-alt"></i>
                                 <span>Secure & Private</span>
                             </div>
-                            <div class="feature-bubble feature-2">
+                            <!-- <div class="feature-bubble feature-2">
                                 <i class="fas fa-clock"></i>
                                 <span>24/7 Available</span>
-                            </div>
+                            </div> -->
                             <div class="feature-bubble feature-3">
                                 <i class="fas fa-heart"></i>
                                 <span>Compassionate Care</span>
                             </div>
                         </div>
                         
-                        <div class="trust-badges">
+                        <!-- <div class="trust-badges">
                             <div class="trust-badge">
                                 <i class="fas fa-certificate"></i>
                                 <span>Licensed</span>
@@ -298,7 +293,7 @@
                                 <i class="fas fa-star"></i>
                                 <span>5-Star Rated</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -378,7 +373,7 @@
                     </div>
                 </div>
                 
-                <div class="achievements">
+                <!-- <div class="achievements">
                     <div class="achievement-card">
                         <div class="achievement-number" data-target="50">0</div>
                         <div class="achievement-label">Lives Transformed</div>
@@ -399,7 +394,7 @@
                         <div class="achievement-label">Success Rate</div>
                         <div class="achievement-growth">Client satisfaction</div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -500,57 +495,8 @@
                     </div>
                 </div>
                 
-                <div class="service-card">
-                    <div class="service-header">
-                        <div class="service-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                    </div>
-                    <h3>Crisis Support</h3>
-                    <p>24/7 emergency mental health support for individuals experiencing acute psychological distress, suicidal thoughts, or mental health emergencies.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> 24/7 availability</li>
-                        <li><i class="fas fa-check"></i> Immediate response</li>
-                        <li><i class="fas fa-check"></i> Crisis intervention</li>
-                        <li><i class="fas fa-check"></i> Safety planning</li>
-                    </ul>
-                    <div class="service-footer">
-                        <div class="service-price">
-                            <span class="price">Free</span>
-                            <span class="period">emergency</span>
-                        </div>
-                        <button class="service-btn" onclick="openEmergencyContact()">
-                            <span>Call Now</span>
-                            <i class="fas fa-phone"></i>
-                        </button>
-                    </div>
-                </div>
                 
-                <div class="service-card">
-                    <div class="service-header">
-                        <div class="service-icon">
-                            <i class="fas fa-laptop"></i>
-                        </div>
-                    </div>
-                    <h3>Online Therapy</h3>
-                    <p>Convenient virtual therapy sessions for those who prefer remote access or cannot visit our physical location. Same quality care from the comfort of your home.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Video/audio sessions</li>
-                        <li><i class="fas fa-check"></i> Secure platform</li>
-                        <li><i class="fas fa-check"></i> Flexible timing</li>
-                        <li><i class="fas fa-check"></i> Home comfort</li>
-                    </ul>
-                    <div class="service-footer">
-                        <div class="service-price">
-                            <span class="price">$30</span>
-                            <span class="period">/session</span>
-                        </div>
-                        <button class="service-btn" onclick="scrollToSection('#contact')">
-                            <span>Start Online</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
+               
                 
                 <div class="service-card">
                     <div class="service-header">
@@ -581,7 +527,7 @@
         </div>
     </section>
 
-    <!-- Mobile App Section -->
+    <!-- Mobile App Section (hidden
     <section id="app" class="section app-section">
         <div class="container">
             <div class="section-header">
@@ -755,10 +701,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="section">
+    <!-- <section id="testimonials" class="section">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Testimonials</span>
@@ -876,99 +822,38 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
+
+    <!-- Therapists Section -->
+    <!-- <section id="therapists" class="section therapists-section"> -->
+    </section> -->
 
     <!-- Contact Section -->
-    <section id="contact" class="section contact-section">
+    <section id="contact" class="section contact">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Contact Us</span>
-                <h2 class="section-title">
-                    Ready to Start Your <span class="title-highlight">Healing Journey?</span>
+                <h2 class="contact-section-title">
+                    Ready to Start Your Healing Journey?
                 </h2>
-                <p class="section-description">
+                <p class="contact-section-description">
                     Take the first step towards better mental health. Contact us today to schedule your consultation or learn more about our services.
                 </p>
             </div>
             
             <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>Visit Our Center</h4>
-                                <p>Taleex, TCC Building, Hodan District</p>
-                                <span>Mogadishu, Somalia</span>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>Call Us</h4>
-                                <p>+252 61 014 2228</p>
-                                <span>24/7 Crisis Support Available</span>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>Email Us</h4>
-                                <p>info@niyaah.org</p>
-                                <span>We respond within 24 hours</span>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>Office Hours</h4>
-                                <p>Mon - Fri: 8:00 AM - 6:00 PM</p>
-                                <span>Sat: 9:00 AM - 2:00 PM</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="social-connect">
-                        <h4>Connect With Us</h4>
-                        <div class="social-grid">
-                            <a href="#" class="social-link whatsapp">
-                                <i class="fab fa-whatsapp"></i>
-                                <span>WhatsApp</span>
-                            </a>
-                            <a href="#" class="social-link facebook">
-                                <i class="fab fa-facebook"></i>
-                                <span>Facebook</span>
-                            </a>
-                            <a href="#" class="social-link instagram">
-                                <i class="fab fa-instagram"></i>
-                                <span>Instagram</span>
-                            </a>
-                            <a href="#" class="social-link twitter">
-                                <i class="fab fa-twitter"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-form-container">
+                <!-- Move form first so it appears on the left and first on mobile -->
+                <div id="contact-form" class="contact-form-container">
                     <div class="form-header">
-                        <h3>Send Us a Message</h3>
-                        <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+                        <h3><span class="contact-section-description">Send Us a Message</span></h3>
+                        <p class="contact-section-description-text"> <span class="contact-section-description-text-subtext">Fill out the form below and we'll get back to you as soon as possible.</span></p>
                     </div>
                     
-                    <form class="contact-form" onsubmit="handleFormSubmission(event)">
+                    <form id="contact-form-element" class="contact-form" onsubmit="handleFormSubmission(event)" action="https://formsubmit.co/info@niyaah.org" method="POST" data-provider="formsubmit">
+                        <!-- FormSubmit configuration -->
+                        <input type="hidden" name="_subject" value="New contact from Niyaah.org" />
+                        <input type="hidden" name="_template" value="box" />
+                        <input type="hidden" name="_captcha" value="false" />
                         <div class="form-group">
                             <input type="text" id="name" name="name" required placeholder=" ">
                             <label for="name">Full Name</label>
@@ -991,10 +876,15 @@
                                 <option value="family">Family Therapy</option>
                                 <option value="group">Group Therapy</option>
                                 <option value="online">Online Therapy</option>
-                                <option value="crisis">Crisis Support</option>
+                                
                                 <option value="workshop">Workshop/Training</option>
                             </select>
                             <label for="service">Service Interested In</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" id="availability" name="Preferred Time" placeholder=" ">
+                            <label for="availability">Preferred Time (when are you available?)</label>
                         </div>
                         
                         <div class="form-group">
@@ -1008,11 +898,187 @@
                         </button>
                     </form>
                 </div>
+
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <!-- <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Visit Our Center</h4>
+                                <p>Taleex, TCC Building, Hodan District</p>
+                                <span>Mogadishu, Somalia</span>
+                            </div>
+                        </div> -->
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Call Us</h4>
+                                <p>
+                                    <a href="#bot" class="open-bot" aria-label="Chat with us on WhatsApp">
+                                      <span class="link-text">+252 61 014 2228</span>  
+                                    </a>
+                                </p>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email Us</h4>
+                                <p>
+                                    <a href="mailto:info@niyaah.org" onclick="return openGmail(event, 'info@niyaah.org');">
+                                      <span class="link-text">  info@niyaah.org </span> 
+                                    </a>
+                                </p>
+                                <span>We respond within 24 hours</span>
+                            </div>
+                        </div>
+                        
+                        <!-- <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Office Hours</h4>
+                                <p>Mon - Fri: 8:00 AM - 6:00 PM</p>
+                                <span>Sat: 9:00 AM - 2:00 PM</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    
+                    <div class="social-connect">
+                        <h4>Connect With Us</h4>
+                        <div class="social-grid">
+                            <a href="#bot" class="social-link whatsapp open-bot" aria-label="Chat with us on WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                            <a href="https://www.facebook.com/share/1CCy9rMfTp/" target="_blank" rel="noopener" class="social-link facebook">
+                                <i class="fab fa-facebook"></i>
+                                <span>Facebook</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
+    <!-- Therapists Section (moved below Contact) -->
+    <section id="therapists" class="section therapists-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">For Therapists</span>
+                <h2 class="section-title">Join Our Trusted Therapist Network</h2>
+                <p class="section-description">
+                    We partner with certified, compassionate therapists who believe in accessible, culturally-sensitive mental healthcare. If you’re licensed and passionate about supporting clients in Somalia and the diaspora, we’d love to collaborate.
+                </p>
+            </div>
+
+            <div class="therapist-grid">
+
+                      <div class="therapist-form-container">
+                    <div class="form-header">
+                        <h3>Therapist Application</h3>
+                        <p>Complete the form and our team will get in touch to verify credentials and next steps.</p>
+                    </div>
+
+                    <form id="therapist-form" class="contact-form" action="https://formsubmit.co/info@niyaah.org" method="POST" data-provider="formsubmit" onsubmit="handleFormSubmission(event)">
+                        <input type="hidden" name="_subject" value="Therapist Application" />
+                        <input type="hidden" name="_template" value="box" />
+                        <input type="hidden" name="Form" value="Therapist Application" />
+                        <div class="form-group">
+                            <input type="text" id="t_name" name="Full Name" required placeholder=" ">
+                            <label for="t_name">Full Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="t_email" name="Email" required placeholder=" ">
+                            <label for="t_email">Email Address</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="t_phone" name="Phone" placeholder=" ">
+                            <label for="t_phone">Phone Number</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="t_license" name="License / Certification" required placeholder=" ">
+                            <label for="t_license">License / Certification</label>
+                        </div>
+                        <div class="form-group">
+                            <select id="t_experience" name="Years of Experience" required>
+                                <option value="">Select</option>
+                                <option value="0-2 years">0–2 years</option>
+                                <option value="3-5 years">3–5 years</option>
+                                <option value="6-10 years">6–10 years</option>
+                                <option value="10+ years">10+ years</option>
+                            </select>
+                            <label for="t_experience">Experience</label>
+                        </div>
+                        <div class="form-group">
+                            <select id="t_mode" name="Preferred Work Mode" required>
+                                <option value="">Select</option>
+                                <option value="Online">Online</option>
+                                <option value="In-person">In‑person</option>
+                                <option value="Both">Both</option>
+                            </select>
+                            <label for="t_mode">Preferred Work Mode</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="t_availability" name="Availability" placeholder=" ">
+                            <label for="t_availability">Availability (days/hours)</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="t_specialties" name="Specializations" rows="4" placeholder=" "></textarea>
+                            <label for="t_specialties">Specializations / Notes</label>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Request to Join</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="therapist-highlights">
+                    <div class="highlight-card">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <div>
+                            <h4>Impactful Work</h4>
+                            <p>Serve individuals and families who need support the most and make a measurable difference.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fas fa-people-arrows"></i>
+                        <div>
+                            <h4>Reliable Client Matching</h4>
+                            <p>We connect therapists with the right clients based on language, specialization, and availability.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h4>Secure Platform</h4>
+                            <p>Confidential, compliant intake with flexible online or in-person session options.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Flexible Scheduling</h4>
+                            <p>Choose your preferred hours and session formats that fit your life.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -1029,19 +1095,10 @@
                         Dedicated to providing compassionate, culturally-sensitive mental health care to the Mogadishu community. Your mental wellness is our priority.
                     </p>
                     <div class="footer-social">
-                        <a href="#" class="social-icon">
+                        <a href="https://www.facebook.com/share/1CCy9rMfTp/" target="_blank" rel="noopener" class="social-icon">
                             <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="#" class="social-icon">
+                        <a href="#bot" class="social-icon open-bot" aria-label="Chat with us on WhatsApp">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
@@ -1055,29 +1112,28 @@
                             <li><a href="#services"><i class="fas fa-users"></i> Family Therapy</a></li>
                             <li><a href="#services"><i class="fas fa-people-group"></i> Group Therapy</a></li>
                             <li><a href="#services"><i class="fas fa-laptop"></i> Online Therapy</a></li>
-                            <li><a href="#services"><i class="fas fa-phone"></i> Crisis Support</a></li>
+                            
                         </ul>
                     </div>
                     
                     <div class="footer-section">
                         <h4>Resources</h4>
                         <ul>
-                            <li><a href="#"><i class="fas fa-book"></i> Mental Health Guide</a></li>
-                            <li><a href="#"><i class="fas fa-download"></i> Mobile App</a></li>
-                            <li><a href="#"><i class="fas fa-calendar"></i> Book Appointment</a></li>
-                            <li><a href="#"><i class="fas fa-question-circle"></i> FAQ</a></li>
-                            <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
+                            <!-- <li><a href="#"><i class="fas fa-book"></i> Mental Health Guide</a></li> -->
+                            
+                            <li><a href="#contact"><i class="fas fa-calendar"></i> Book Appointment</a></li>
+                            <!-- <li><a href="#"><i class="fas fa-question-circle"></i> FAQ</a></li> -->
                         </ul>
                     </div>
                     
                     <div class="footer-section">
                         <h4>Contact</h4>
                         <ul>
-                            <li><a href="tel:+252610142228"><i class="fas fa-phone"></i> +252 61 0142228</a></li>
-                            <li><a href="mailto:info@niyaah.org"><i class="fas fa-envelope"></i> info@niyaah.org</a></li>
-                            <li><a href="#"><i class="fas fa-map-marker-alt"></i>Taleex, TCC Building, Hodan District</a></li>
-                            <li><a href="#"><i class="fas fa-clock"></i>sat-thurs: 8AM-6PM</a></li>
-                            <li><a href="#"><i class="fas fa-exclamation-triangle"></i> 24/7 Crisis Support</a></li>
+                            <li><a href="#bot" class="open-bot"><i class="fas fa-phone"></i> +252 61 0142228</a></li>
+                            <li><a href="mailto:info@niyaah.org" onclick="return openGmail(event, 'info@niyaah.org');"><i class="fas fa-envelope"></i> info@niyaah.org</a></li>
+                            <!-- <li><a href="#"><i class="fas fa-map-marker-alt"></i>Taleex, TCC Building, Hodan District</a></li>
+                            <li><a href="#"><i class="fas fa-clock"></i>sat-thurs: 8AM-6PM</a></li> -->
+                            
                         </ul>
                     </div>
                 </div>
@@ -1124,10 +1180,7 @@
                     <i class="fas fa-calendar-plus"></i>
                     <span>Book an appointment</span>
                 </div>
-                <div class="quick-reply" onclick="sendMessage('emergency')">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <span>I need emergency support</span>
-                </div>
+                
                 <div class="quick-reply" onclick="sendMessage('info')">
                     <i class="fas fa-info-circle"></i>
                     <span>Learn about services</span>

@@ -1,5 +1,6 @@
 // Global Variables
 const whatsappNumber = '+252610142228';
+let botJustOpened = false; // suppress immediate outside-close after open
 let currentSlide = 0;
 let isMenuOpen = false;
 let isLoading = true;
@@ -25,6 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeParallax();
     initializeAppScreens();
     initializeFormHandling();
+    initializeContactCards();
+    initializeBotOpeners();
 });
 
 // Loading Screen Functions
@@ -76,20 +79,24 @@ function updateActiveLink(link) {
 }
 
 function updateActiveNavigation() {
-    const sections = document.querySelectorAll('section');
+    const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
 
-    sections.forEach((section, index) => {
+    let currentId = null;
+    sections.forEach((section) => {
         const sectionTop = section.offsetTop - 90;
         const sectionBottom = sectionTop + section.offsetHeight;
-
         if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionBottom) {
-            navLinks.forEach(link => link.classList.remove('active'));
-            if (navLinks[index]) {
-                navLinks[index].classList.add('active');
-            }
+            currentId = section.id;
         }
     });
+
+    navLinks.forEach((link) => link.classList.remove('active'));
+    if (currentId) {
+        const match = document.querySelector(`.nav-link[href="#${currentId}"]`) ||
+                      document.querySelector(`.nav-link[data-section="#${currentId}"]`);
+        if (match) match.classList.add('active');
+    }
 }
 
 function initializeNavigation() {
@@ -103,13 +110,17 @@ function initializeNavigation() {
             updateActiveLink(link);
             
             e.preventDefault();
-            const target = document.querySelector(link.getAttribute('href'));
+            let href = link.getAttribute('href');
+            let target = document.querySelector(href);
+            // For Contact link, scroll directly to the form so it's visible
+            if (href === '#contact') {
+                target = document.querySelector('#contact-form') || document.querySelector('#contact .contact-form-container') || target;
+            }
             if (target) {
-                const offsetTop = target.offsetTop - 80;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else if (href && href.startsWith('#')) {
+                // Fallback to native hash behavior if element not found
+                window.location.hash = href;
             }
         });
     });
@@ -117,15 +128,21 @@ function initializeNavigation() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            // Open in-site bot when targeting #bot or marked as open-bot
+            if (href === '#bot' || this.classList.contains('open-bot') || this.dataset.openBot === 'true') {
+                openBot(e);
+                return;
+            }
+            let target = document.querySelector(href);
+            if (href === '#contact') {
+                target = document.querySelector('#contact-form') || document.querySelector('#contact .contact-form-container') || target;
+            }
             if (target) {
-                const offsetTop = target.offsetTop - 80;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-                
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 createRippleEffect(this, e);
+            } else if (href && href.startsWith('#')) {
+                window.location.hash = href;
             }
         });
     });
@@ -337,22 +354,19 @@ function showTestimonial(index) {
 
 // Enhanced WhatsApp Functions
 function initializeWhatsApp() {
-    setTimeout(() => {
-        if (whatsappWidget && !whatsappWidget.classList.contains('show')) {
-            showWhatsAppWidget();
-        }
-    }, 10000);
+    // Do not auto-open on page load. Only open via user click.
 
-    setTimeout(() => {
-        if (whatsappWidget && whatsappWidget.classList.contains('show')) {
-            closeWhatsApp();
-        }
-    }, 40000);
-
+    // Close the widget when clicking outside of it (but not when clicking the floating button)
     document.addEventListener('click', (e) => {
-        if (whatsappWidget && whatsappWidget.classList.contains('show') && 
-            !whatsappWidget.contains(e.target) && 
-            whatsappFloat && !whatsappFloat.contains(e.target)) {
+        if (botJustOpened) return; // ignore the first click that opened the bot
+        const opener = e.target && e.target.closest('.open-bot,[data-open-bot="true"],a[href="#bot"]');
+        if (opener) return;
+        if (
+            whatsappWidget &&
+            whatsappWidget.classList.contains('show') &&
+            !whatsappWidget.contains(e.target) &&
+            whatsappFloat && !whatsappFloat.contains(e.target)
+        ) {
             closeWhatsApp();
         }
     });
@@ -362,6 +376,10 @@ function showWhatsAppWidget() {
     if (whatsappWidget) {
         whatsappWidget.classList.add('show');
         whatsappWidget.style.animation = 'slideUp 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        whatsappWidget.style.pointerEvents = 'auto';
+        // Suppress outside-close for a short moment to avoid immediate hide
+        botJustOpened = true;
+        setTimeout(() => { botJustOpened = false; }, 250);
     }
 }
 
@@ -370,6 +388,8 @@ function closeWhatsApp() {
         whatsappWidget.style.animation = 'slideDown 0.3s ease-in';
         setTimeout(() => {
             whatsappWidget.classList.remove('show');
+            // Ensure the hidden widget doesn't block clicks on the float button
+            whatsappWidget.style.pointerEvents = 'none';
         }, 300);
     }
 }
@@ -490,18 +510,21 @@ function initializeAnimations() {
 
 // Utility Functions
 function scrollToSection(target) {
+    // If target is contact, aim at the form container for better visibility
+    if (target === '#contact' || target === '#contact-form') {
+        const contactForm = document.querySelector('#contact-form') || document.querySelector('#contact .contact-form-container');
+        if (contactForm) {
+            contactForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            contactForm.style.boxShadow = '0 0 20px rgba(34, 197, 94, 0.25)';
+            setTimeout(() => contactForm.style.boxShadow = '', 2000);
+            return;
+        }
+    }
     const element = document.querySelector(target);
     if (element) {
-        const offsetTop = element.offsetTop - 80;
-        window.scrollTo({
-            top: offsetTop,
-            behavior: 'smooth'
-        });
-        
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         element.style.boxShadow = '0 0 20px rgba(34, 197, 94, 0.3)';
-        setTimeout(() => {
-            element.style.boxShadow = '';
-        }, 2000);
+        setTimeout(() => { element.style.boxShadow = ''; }, 2000);
     }
 }
 
@@ -529,6 +552,8 @@ function handleFormSubmission(event) {
     submitBtn.disabled = true;
     submitBtn.style.background = '#9E9E9E';
 
+    const useFormSubmit = form.getAttribute('data-provider') === 'formsubmit' || (form.action && form.action.includes('formsubmit.co'));
+
     let progress = 0;
     const progressInterval = setInterval(() => {
         progress += 10;
@@ -536,17 +561,22 @@ function handleFormSubmission(event) {
         
         if (progress >= 100) {
             clearInterval(progressInterval);
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent Successfully!';
-            submitBtn.style.background = '#22C55E';
-            
-            showNotification('Thank you! We\'ll get back to you within 24 hours.', 'success');
-            form.reset();
-            
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                submitBtn.style.background = '';
-            }, 3000);
+            if (useFormSubmit) {
+                // Let FormSubmit.co handle the email delivery and success page
+                form.submit();
+            } else {
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent Successfully!';
+                submitBtn.style.background = '#22C55E';
+                
+                showNotification('Thank you! We\'ll get back to you within 24 hours.', 'success');
+                form.reset();
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.style.background = '';
+                }, 3000);
+            }
         }
     }, 200);
 }
@@ -661,10 +691,6 @@ function cycleAppScreens() {
 }
 
 // Utility functions for external calls
-function openEmergencyContact() {
-    window.open(`tel:${whatsappNumber}`, '_self');
-}
-
 function openWhatsApp() {
     const message = encodeURIComponent("Hello! I'm interested in your mental health services. Can you help me?");
     window.open(`https://wa.me/${whatsappNumber.replace('+', '')}?text=${message}`, '_blank');
@@ -686,9 +712,6 @@ function sendMessage(type) {
         case 'book':
             message = "I'd like to book an appointment for therapy sessions.";
             break;
-        case 'emergency':
-            message = "I need emergency mental health support.";
-            break;
         case 'info':
             message = "Can you provide more information about your services?";
             break;
@@ -698,6 +721,88 @@ function sendMessage(type) {
 
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodedMessage}`, '_blank');
+}
+
+// Make entire contact-item clickable (email/phone)
+function initializeContactCards() {
+    const items = document.querySelectorAll('.contact-item');
+    items.forEach((item) => {
+        const link = item.querySelector('.contact-details a[href]');
+        if (!link) return;
+
+        const href = link.getAttribute('href');
+        item.setAttribute('role', 'link');
+        item.setAttribute('tabindex', '0');
+        item.classList.add('is-clickable');
+
+        const navigate = () => {
+            if (!href) return;
+            try {
+                // Bot opener
+                if (link.classList.contains('open-bot') || link.dataset.openBot === 'true' || href === '#bot') {
+                    openBot();
+                } else if (href.startsWith('mailto:')) {
+                    const address = href.replace('mailto:', '');
+                    if (typeof openGmail === 'function') {
+                        openGmail(null, address);
+                    } else {
+                        window.location.href = href;
+                    }
+                } else if (href.startsWith('tel:')) {
+                    window.location.href = href;
+                } else {
+                    window.open(href, '_blank');
+                }
+            } catch (e) {
+                // Fallback: trigger the anchor click
+                link.click();
+            }
+        };
+
+        item.addEventListener('click', (e) => {
+            if (e.target.closest('a')) return; // native anchor click
+            e.preventDefault();
+            navigate();
+        });
+
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                navigate();
+            }
+        });
+    });
+}
+
+// Open the in-site WhatsApp widget
+function openBot(event) {
+    if (event) event.preventDefault();
+    if (typeof showWhatsAppWidget === 'function') {
+        showWhatsAppWidget();
+    }
+    return false;
+}
+
+function initializeBotOpeners() {
+    document.querySelectorAll('.open-bot,[data-open-bot="true"]').forEach((el) => {
+        el.addEventListener('click', openBot);
+    });
+}
+
+// Try to open Gmail compose (web) with graceful fallback to mailto
+function openGmail(event, to, subject = '', body = '') {
+    if (event) event.preventDefault();
+    const params = [];
+    if (subject) params.push(`su=${encodeURIComponent(subject)}`);
+    if (body) params.push(`body=${encodeURIComponent(body)}`);
+    const query = ['view=cm', 'fs=1', `to=${encodeURIComponent(to)}`].concat(params).join('&');
+    const gmailUrl = `https://mail.google.com/mail/?${query}`;
+    try {
+        window.open(gmailUrl, '_blank');
+    } catch (e) {
+        window.location.href = `mailto:${to}`;
+    }
+    return false;
 }
 
 function currentTestimonial(n) {
